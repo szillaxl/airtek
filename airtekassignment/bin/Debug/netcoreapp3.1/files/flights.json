@@ -1,0 +1,36 @@
+{
+    "flights":
+    [
+        {
+            "origin" : "YUL",
+            "destination" : "YYZ",
+            "date" : "1"
+        },
+        {
+            "origin" : "YUL",
+            "destination" : "YYC",
+            "date" : "1"
+        },
+        {
+            "origin" : "YUL",
+            "destination" : "YVR",
+            "date" : "1"
+        },
+        {
+            "origin" : "YUL",
+            "destination" : "YYZ",
+            "date" : "2"
+        },
+        {
+            "origin" : "YUL",
+            "destination" : "YYC",
+            "date" : "2"
+            
+        },
+        {
+            "origin" : "YUL",
+            "destination" : "YVR",
+            "date" : "2"
+        }
+    ]
+}
