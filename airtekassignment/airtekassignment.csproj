@@ -8,4 +8,17 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="files\orders.json" />
+    <None Remove="files\flights.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\flights.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInPackage>true</IncludeInPackage>
+    </Content>
+  </ItemGroup>
 </Project>
