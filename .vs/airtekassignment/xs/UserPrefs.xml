@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{09D94C4D-D9CE-4277-896A-07CD3A49CCF5}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="airtekassignment/Program.cs">
+    <Files>
+      <File FileName="airtekassignment/FlightClasses.cs" Line="11" Column="6" />
+      <File FileName="airtekassignment/Program.cs" Line="21" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="airtekassignment" expanded="True">
+            <Node name="airtekassignment" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.airtekassignment PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/szillaxl/Projects/airtek/airtekassignment/Program.cs" relfile="airtekassignment/Program.cs" line="21" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

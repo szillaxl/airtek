@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "NZj9oKURzLzZx/bKSxZmYx0UQn/8PmRItkYSoPxw1hEO1Hgm3eJSQxakW5f2q7RVTCvRwti7n3IS+EEs95v3ww==",
+  "success": true,
+  "projectFilePath": "/Users/szillaxl/Projects/airtek/airtekassignment/airtekassignment.csproj",
+  "expectedPackageFiles": [
+    "/Users/szillaxl/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

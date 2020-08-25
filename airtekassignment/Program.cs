@@ -16,45 +16,47 @@ namespace airtekassignment
             {
                 var flightsString = flightsJson.ReadToEnd();
 
-                dynamic flightsObject = JsonConvert.DeserializeObject<FlightSchedule>(flightsString); 
- 
-                Console.WriteLine(flightsObject);
+                var flightsList = JsonConvert.DeserializeObject<List<Flight>>(flightsString);
+
+                Console.WriteLine(flightsList);
 
                 Console.WriteLine("loading flights...complete");
 
-                var displayFlightsInput = string.Empty;                    
-                do
-                {
-                    Console.WriteLine("do you wish to display the flights? (Y/N)");
-                    displayFlightsInput = (Console.ReadLine()).ToUpperInvariant();
-                    
-                } while (displayFlightsInput != "Y" && displayFlightsInput != "N");
+                GetInput("Do you want to display the flight list?");
 
-                if (displayFlightsInput == "N")
+                Console.WriteLine("generating list");
+
+                var flightCounter = 1;
+                foreach (var flight in flightsList)
                 {
-                    Console.WriteLine("Thanks for using our system");
+                    Console.WriteLine($"Flight: {flightCounter}, departure: {flight.origin}, arrival: {flight.destination}, day: {flight.date}");
+                    flightCounter++;
                 }
-                else
-                {
-                    Console.WriteLine("generating list");   
-                }
-                
+
+                GetInput("Do you want to display the orders list?");
+
+                StreamReader ordersJson = new StreamReader("files/orders.json");
+                var ordersString = ordersJson.ReadToEnd();
+                var ordersList = JsonConvert.DeserializeObject<List<Flight>>(ordersString);
+
             }
+        }
 
+        private static void GetInput(string promt)
+        {
+            var input = string.Empty;
+            do
+            {
+                Console.WriteLine(promt + "(Y/N)");
+                input = (Console.ReadLine()).ToUpperInvariant();
+
+            } while (input != "Y" && input != "N");
+
+            if (input == "N")
+            {
+                Console.WriteLine("Thanks for using our system");
+                Environment.Exit(0);
+            }
         }
     }
-
-    public class Flight
-    {
-        public string origin { get; set; }
-        public string destination { get; set; }
-        public string date { get; set; }
-    }
-
-    public class FlightSchedule
-    {
-        public List<Flight> Flights { get; set; }
-
-    }
-    
 }
