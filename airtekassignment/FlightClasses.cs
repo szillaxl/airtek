@@ -9,4 +9,10 @@ namespace airtekassignment
         public string destination { get; set; }
         public string date { get; set; }
     }
+
+    public class Order
+    {
+        public string destination { get; set; }
+    }
+   
 }

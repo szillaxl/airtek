@@ -18,8 +18,6 @@ namespace airtekassignment
 
                 var flightsList = JsonConvert.DeserializeObject<List<Flight>>(flightsString);
 
-                Console.WriteLine(flightsList);
-
                 Console.WriteLine("loading flights...complete");
 
                 GetInput("Do you want to display the flight list?");
@@ -37,7 +35,26 @@ namespace airtekassignment
 
                 StreamReader ordersJson = new StreamReader("files/orders.json");
                 var ordersString = ordersJson.ReadToEnd();
-                var ordersList = JsonConvert.DeserializeObject<List<Flight>>(ordersString);
+                var ordersList = JsonConvert.DeserializeObject<Dictionary<string,Order>>(ordersString);
+                foreach (var order in ordersList)
+                {
+                    var x = 0;
+                    foreach (var flight in flightsList)
+                    {
+                        x++;
+                        if (order.Value.destination == flight.destination)
+                        {
+                           Console.WriteLine($"{order.Value.destination} - {flight.destination} match");
+                           break;
+                        }
+                        if (x == flightsList.Count)
+                        {
+                            Console.WriteLine($"order: {order.Key}, flightNumber: not scheduled");
+                        }
+                        
+                    }
+
+                 }
 
             }
         }
