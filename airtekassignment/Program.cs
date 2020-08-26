@@ -13,9 +13,7 @@ namespace airtekassignment
         {
             Console.WriteLine("loading flights");
 
-            var flightsString = File.ReadAllText("files/flights.json");
-
-            var flightsList = JsonSerializer.Deserialize<List<Flight>>(flightsString);
+            List<Flight> flightsList = GetFlightsList();
 
             Console.WriteLine("loading flights...complete");
 
@@ -23,49 +21,29 @@ namespace airtekassignment
 
             Console.WriteLine("generating list");
 
-            var flightCounter = 1;
-            foreach (var flight in flightsList)
-            {
-                Console.WriteLine($"Flight: {flightCounter}, departure: {flight.origin}, arrival: {flight.destination}, day: {flight.date}");
-                flightCounter++;
-            }
+            DisplayFlightsList(flightsList);
 
             GetInput("Do you want to display the orders list?");
 
-            var ordersString = File.ReadAllText("files/orders.json");
-            
-            var ordersList = JsonSerializer.Deserialize<Dictionary<string,Order>>(ordersString);
+            Dictionary<string, Order> ordersList = GetOrdersList();
 
             var destinationClasses = new List<DestinationClass>();
             var unscheduledOrders = new Dictionary<string, Order>();
 
+            GroupFLights(flightsList, destinationClasses);
+            ProcessOrders(ordersList, destinationClasses, unscheduledOrders);
 
-            // Group all flights into flights per destination
-            for (int i = 0; i < flightsList.Count; i++)
-            {
-                var destinationClassForFlight = destinationClasses.FirstOrDefault(destClass => destClass.destinationAirport == flightsList[i].destination);
-                if (destinationClassForFlight == null)
-                {
-                    var destinationClass = new DestinationClass
-                    {
-                        destinationAirport = flightsList[i].destination,
-                        originAirport = flightsList[i].origin
-                    };
-                    destinationClass.flights.Add(new FlightClass{ flightNumber = i + 1, day = flightsList[i].date });
-                    destinationClasses.Add(destinationClass);
-                }
-                else
-                {
-                    destinationClassForFlight.flights.Add(new FlightClass { flightNumber = i + 1, day = flightsList[i].date });
-                }
-            }
+            DisplayOrdersSchedule(destinationClasses, unscheduledOrders);
 
+        }
 
+        private static void ProcessOrders(Dictionary<string, Order> ordersList, List<DestinationClass> destinationClasses, Dictionary<string, Order> unscheduledOrders)
+        {
             // Process orders and assign each order to an appropriate flight
             foreach (var order in ordersList)
             {
                 var orderAdded = false;
-                
+
                 foreach (var destinationClass in destinationClasses)
                 {
                     if (order.Value.destination == destinationClass.destinationAirport)
@@ -89,7 +67,33 @@ namespace airtekassignment
                     unscheduledOrders[order.Key] = order.Value;
                 }
             }
+        }
 
+        private static void GroupFLights(List<Flight> flightsList, List<DestinationClass> destinationClasses)
+        {
+            // Group all flights into flights per destination
+            for (int i = 0; i < flightsList.Count; i++)
+            {
+                var destinationClassForFlight = destinationClasses.FirstOrDefault(destClass => destClass.destinationAirport == flightsList[i].destination);
+                if (destinationClassForFlight == null)
+                {
+                    var destinationClass = new DestinationClass
+                    {
+                        destinationAirport = flightsList[i].destination,
+                        originAirport = flightsList[i].origin
+                    };
+                    destinationClass.flights.Add(new FlightClass { flightNumber = i + 1, day = flightsList[i].date });
+                    destinationClasses.Add(destinationClass);
+                }
+                else
+                {
+                    destinationClassForFlight.flights.Add(new FlightClass { flightNumber = i + 1, day = flightsList[i].date });
+                }
+            }
+        }
+
+        private static void DisplayOrdersSchedule(List<DestinationClass> destinationClasses, Dictionary<string, Order> unscheduledOrders)
+        {
             // display the order schedules
             foreach (var destination in destinationClasses)
             {
@@ -107,7 +111,31 @@ namespace airtekassignment
             {
                 Console.WriteLine($"order: {order.Key}, flightNumber: not scheduled");
             }
-            
+        }
+
+        private static Dictionary<string, Order> GetOrdersList()
+        {
+            var ordersString = File.ReadAllText("files/orders.json");
+
+            var ordersList = JsonSerializer.Deserialize<Dictionary<string, Order>>(ordersString);
+            return ordersList;
+        }
+
+        private static void DisplayFlightsList(List<Flight> flightsList)
+        {
+            var flightCounter = 1;
+            foreach (var flight in flightsList)
+            {
+                Console.WriteLine($"Flight: {flightCounter}, departure: {flight.origin}, arrival: {flight.destination}, day: {flight.date}");
+                flightCounter++;
+            }
+        }
+
+        private static List<Flight> GetFlightsList()
+        {
+            var flightsString = File.ReadAllText("files/flights.json");
+
+            return JsonSerializer.Deserialize<List<Flight>>(flightsString);
         }
 
         private static void GetInput(string promt)
