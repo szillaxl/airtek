@@ -4,11 +4,8 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Remove="App.config" />
     <None Remove="files\orders.json" />
     <None Remove="files\flights.json" />
   </ItemGroup>
