@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 
@@ -36,25 +37,40 @@ namespace airtekassignment
                 StreamReader ordersJson = new StreamReader("files/orders.json");
                 var ordersString = ordersJson.ReadToEnd();
                 var ordersList = JsonConvert.DeserializeObject<Dictionary<string,Order>>(ordersString);
+
+                var destinationClasses = new List<DestinationClass>();
+                var flightClasses = new FlightClass();
+                var orders = new List<Order>();
+
+                for (int i = 0; i < flightsList.Count(); i++)
+                {
+
+                    flightClasses.flightNumber = i;
+                    
+                    destinationClasses.Add(new DestinationClass()
+                    {
+                        destinationAirport = flightsList[i].destination
+                    });
+                    
+         
+                }
+
+                var destinationList = flightsList.Select(flight => flight.destination).Distinct();
                 foreach (var order in ordersList)
                 {
-                    var x = 0;
-                    foreach (var flight in flightsList)
+                    
+                    if (destinationList.Contains(order.Value.destination))
                     {
-                        x++;
-                        if (order.Value.destination == flight.destination)
-                        {
-                           Console.WriteLine($"{order.Value.destination} - {flight.destination} match");
-                           break;
-                        }
-                        if (x == flightsList.Count)
-                        {
-                            Console.WriteLine($"order: {order.Key}, flightNumber: not scheduled");
-                        }
                         
+
+                    }
+                    else
+                    {
+                         Console.WriteLine($"order: {order.Key}, flightNumber: not scheduled");
                     }
 
-                 }
+
+                }
 
             }
         }
@@ -75,5 +91,18 @@ namespace airtekassignment
                 Environment.Exit(0);
             }
         }
+
+        private class FlightClass
+        {
+            public List<Order> orders { get; set; }
+            public int flightNumber { get; set; }
+        }
+
+        private class DestinationClass
+        {
+            public List<FlightClass> flights { get; set; }
+            public string destinationAirport { get; set; }
+        }
+
     }
 }
