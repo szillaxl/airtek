@@ -8,8 +8,10 @@ namespace airtekassignment
     {
         static void Main(string[] args)
         {
+            IDataProvider<Flight> flightsProvider = new FlightsProvider();
+            IDataProvider<Order> ordersProvider = new OrdersProvider();
+            var program =  new Scheduler(flightsProvider, ordersProvider);
             Console.WriteLine("loading flights");
-            var program =  new Scheduler();
             var scheduledflights =  program.getScheduledFlights();
             Console.WriteLine("loading flights...complete");
             GetInput("Do you want to display the flight list?");
@@ -32,10 +34,10 @@ namespace airtekassignment
             }
         }
 
-        private static void DisplayOrdersSchedule(List<Destination> destinationClasses)
+        private static void DisplayOrdersSchedule(List<Destination> destinations)
         {
             // display the order schedules
-            foreach (var destination in destinationClasses)
+            foreach (var destination in destinations)
             {
                 foreach (var flight in destination.flights)
                 {
@@ -55,7 +57,6 @@ namespace airtekassignment
                 Console.WriteLine($"order: {order.orderNumber}, flightNumber: not scheduled");
             }
         }
-
 
         private static void GetInput(string promt)
         {

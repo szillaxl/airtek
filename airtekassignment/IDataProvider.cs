@@ -3,7 +3,7 @@
 
 namespace airtekassignment
 {
-    internal interface IDataProvider<T>
+    public interface IDataProvider<T>
     {
         List<T> GetData();
     }

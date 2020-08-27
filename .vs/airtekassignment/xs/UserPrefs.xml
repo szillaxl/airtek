@@ -1,16 +1,18 @@
 ﻿<Properties StartupConfiguration="{09D94C4D-D9CE-4277-896A-07CD3A49CCF5}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="airtekassignment/Scheduler.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="airtekassignment/FlightsProvider.cs">
     <Files>
-      <File FileName="airtekassignment/Program.cs" Line="22" Column="57" />
+      <File FileName="airtekassignment/Program.cs" Line="11" Column="32" />
       <File FileName="airtekassignment/App.config" Line="1" Column="1" />
-      <File FileName="airtekassignment/Scheduler.cs" Line="1" Column="1" />
+      <File FileName="airtekassignment/Scheduler.cs" Line="9" Column="32" />
+      <File FileName="airtekassignment/IDataProvider.cs" Line="6" Column="27" />
+      <File FileName="airtekassignment/FlightsProvider.cs" Line="8" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="airtekassignment" expanded="True">
             <Node name="airtekassignment" expanded="True">
-              <Node name="Scheduler.cs" selected="True" />
+              <Node name="FlightsProvider.cs" selected="True" />
             </Node>
           </Node>
         </State>

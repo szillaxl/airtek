@@ -6,6 +6,15 @@ namespace airtekassignment
 {
     public class Scheduler
     {
+        private readonly IDataProvider<Flight> _flightsProvider;
+        private readonly IDataProvider<Order> _ordersProvider;
+        public Scheduler(IDataProvider<Flight> flightsProvider, IDataProvider<Order> ordersProvider)
+        {
+            _flightsProvider = flightsProvider;
+            _ordersProvider = ordersProvider;
+        }
+
+
         private List<Flight> _flights;
         private List<Flight> flights
         {
@@ -13,8 +22,7 @@ namespace airtekassignment
             {
                 if (_flights == null)
                 {
-                    IDataProvider<Flight> flightsProvider = new FlightsProvider();
-                    _flights = flightsProvider.GetData();
+                    _flights = _flightsProvider.GetData();
                 }
                 return _flights;  
             }
@@ -27,8 +35,7 @@ namespace airtekassignment
             {
                 if (_orders == null)
                 {
-                    IDataProvider<Order> ordersProvider = new OrdersProvider();
-                    _orders = ordersProvider.GetData();
+                    _orders = _ordersProvider.GetData();
                 }
                 return _orders;
             }
